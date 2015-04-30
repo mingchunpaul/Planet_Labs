@@ -16,6 +16,7 @@ class getAnagram():
         while True:
             if i == length-1:
                 final.append([self.words[i]])
+                break
             res = []
             item = self.words[i]
             res.append(item)
