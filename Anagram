@@ -1,0 +1,45 @@
+import os
+import sys
+import csv
+
+class getAnagram():
+    def __init__(self, input_file='/usr/dict/words.txt', output_file='/usr/dict/words_mod.txt'):
+        self.words = open(input_file).readlines()
+        self.output_file = output_file
+        for i in range(len(self.words)-1):
+            self.words[i] = self.words[i][:-1]
+
+    def output(self):
+        final = []
+        length = len(self.words)
+        i = 0
+        while True:
+            if i == length-1:
+                final.append([self.words[i]])
+            res = []
+            item = self.words[i]
+            res.append(item)
+            permutation = self.permutation(item)
+            for j in range(i+1, len(self.words)):
+                if self.words[j] in permutation:
+                    res.append(self.words)
+                    self.words.pop(j)
+            final.append(res)
+            i += 1
+
+        temp = open(self.output_file, 'w')
+        temp.write("\n".join(final))
+        temp.close()
+        return
+
+    def permutation(self, word):
+        length = len(word)
+        if length == 0:
+            return []
+        if length == 1:
+            return [word]
+        res = []
+        for i in range(length):
+            for j in self.permutation(word[0:i] + word[i+1:]):
+                res.append([word[i]] + j)
+        return res
