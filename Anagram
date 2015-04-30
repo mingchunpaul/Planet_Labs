@@ -27,9 +27,16 @@ class getAnagram():
                     self.words.pop(j)
             final.append(res)
             i += 1
-
+        
+        temp2 = []
+        for i in range(len(final)):
+            item = ''
+            for j in range(len(final[i])):
+                item = item + ', ' + final[j][j]
+            temp2.append(item)
+        
         temp = open(self.output_file, 'w')
-        temp.write("\n".join(final))
+        temp.write("\n".join(temp2))
         temp.close()
         return
 
